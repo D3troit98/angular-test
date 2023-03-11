@@ -1,15 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit ,AfterViewChecked} from '@angular/core';
 import { Room, RoomList } from './rooms';
-
+import { HeaderComponent } from '../header/header.component';
 @Component({
   selector: 'app-rooms',
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.css'],
 })
-export class RoomsComponent implements OnInit {
+export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
   constructor() {}
 
+  ngAfterViewChecked(): void {
+    
+  }
+  @ViewChild(HeaderComponent, { static: true })
+  headerComponent!: HeaderComponent;
+
+  ngAfterViewInit() {
+    this.headerComponent.title = 'Rooms View';
+  }
   ngOnInit(): void {
+    console.log(this.headerComponent);
     this.roomList = [
       {
         roomNumber: 1,
